@@ -1,7 +1,7 @@
 {
   "name": "node-rpsls",
   "version": "1.0.0",
-  "description": "Aaron-RPSLZ",
+  "description": "a03-module",
   "main": "./lib/rpsls.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,14 +12,14 @@
   },
   "author": "@awtack",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/comp426-2023-spring/a03-awtack/issues"
-  },
-  "homepage": "https://github.com/comp426-2023-spring/a03-awtack#readme",
   "bin": {
     "node-rps": "./bin/rps-cli.js",
     "node-rpsls": "./bin/rpsls-cli.js"
   },
+  "bugs": {
+    "url": "https://github.com/comp426-2023-spring/a03-awtack/issues"
+  },
+  "homepage": "https://github.com/comp426-2023-spring/a03-awtack#readme",
   "dependencies": {
     "minimist": "^1.2.8"
   },
