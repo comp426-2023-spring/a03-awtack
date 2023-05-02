@@ -1,25 +1,28 @@
 import {rpsls} from "../lib/rpsls.js";
 import minimist from "minimist";
 
-const rules = `Rock, Paper, Scissors, Lizard, Spock Rules:
-    * Rock crushes Scissors
-    * Scissors cuts Paper
-    * Paper disproves spock
-    * Spock vaporizes Rock
-    * Rock smashes Lizard
-    * Lizard bites Spock
-    * Spock breaks Scissors
-    * Scissors chop up Lizard
-    * Lizard eats Paper
-    * Paper covers Rock`
+const rules = `Rules for the Lizard-Spock Expansion of Rock Paper Scissors:\n
+- Scissors CUTS Paper
+- Paper COVERS Rock
+- Rock SMOOSHES Lizard
+- Lizard POISONS Spock
+- Spock SMASHES Scissors
+- Scissors DECAPITATES Lizard
+- Lizard EATS Paper
+- Paper DISPROVES Spock
+- Spock VAPORIZES Rock
+- Rock CRUSHES Scissors`;
 
-const help = `How to play: node-rpsls [ENTER rock, spock, ... ]
-    -h, --help      Display this
-    -r, --rules     Show rules of the game/win conditions
-    Example:
-        node-rpsls      Returns {player: spock'}
-        node-rpsls paper     Returns{player: paper, opponent: spock, result: win
-`
+const help = `Usage: node-rpsls [SHOT]
+Play the Lizard-Spock Expansion of Rock Paper Scissors (RPSLS)!
+  -h, --help        display this help message and exit
+  -r, --rules       display the rules and exit
+Examples:
+  node-rpsls        Return JSON with single player RPSLS result.
+                    e.g. {"player":"rock"}
+  node-rpsls rock   Return JSON with results for RPSLS played against a simulated opponent.
+                    e.g {"player":"rock","opponent":"Spock","result":"lose"}`;
+
 const args = minimist(process.argv.slice(2));
 if(args.h){
     console.log(help);
@@ -32,7 +35,12 @@ if(args.r){
 
 try {
     console.log(JSON.stringify(rpsls(args._[0])));
-} catch (error) {
-    console.log("argument is out of range")
-    process.exit();
+} catch (error){
+    if(error  instanceof RangeError)
+    {
+        console.error('${arg._[0]} is out of range');
+        rules();
+        help();
+        process.exit(1);
+    }
 }
