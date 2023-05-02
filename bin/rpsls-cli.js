@@ -24,11 +24,11 @@ Examples:
                     e.g {"player":"rock","opponent":"Spock","result":"lose"}`;
 
 const args = minimist(process.argv.slice(2));
-if(args.h){
+if(args.h || args.help){
     console.log(help);
     process.exit(0);
 }
-if(args.r){
+if(args.r || args.rules){
     console.log(rules);
     process.exit(0);
 }
@@ -39,8 +39,8 @@ try {
     if(error  instanceof RangeError)
     {
         console.error('${arg._[0]} is out of range');
-        rules();
-        help();
+        console.log(help);
+        console.log(rules);
         process.exit(1);
     }
 }
