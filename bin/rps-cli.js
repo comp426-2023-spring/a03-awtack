@@ -1,32 +1,39 @@
 import {rps} from "../lib/rpsls.js";
 import minimist from "minimist";
 
-const rules = `Rock, Paper, Scissors, Lizard, Spock Rules:
-    * Rock crushes Scissors
-    * Scissors cuts Paper
-    * Paper covers Rock
-`
+const rules = `Rules for Rock Paper Scissors:
+- Scissors CUTS Paper
+- Paper COVERS Rock
+- Rock CRUSHES Scissors`;
 
-const help = `How to play: node-rpsls [ENTER rock, ... ]
-    -h, --help      Display this
-    -r, --rules     Show rules of the game/win conditions
-    Example:
-        node-rpsls      Returns {player: rock'}
-        node-rpsls paper     Returns{player: paper, opponent: rock, result: win
-`
+const help = `Usage: node-rps [SHOT]
+Play Rock Paper Scissors (RPS)
+  -h, --help      display this help message and exit
+  -r, --rules     display the rules and exit
+Examples:
+  node-rps        Return JSON with single player RPS result.
+                  e.g. {"player":"rock"}
+  node-rps rock   Return JSON with results for RPS played against a simulated opponent.
+                  e.g {"player":"rock","opponent":"scissors","result":"win"}
+ `;
+
 const args = minimist(process.argv.slice(2));
-if(args.h){
+if(args.h || args.help){
     console.log(help);
     process.exit(0);
 }
-if(args.r){
+if(args.r || args.rules){
     console.log(rules);
     process.exit(0);
 }
 
 try {
     console.log(JSON.stringify(rps(args._[0])));
-} catch (error) {
-    console.log("argument is out of range")
-    process.exit();
+} catch (error){
+    if(error  instanceof RangeError)
+    {
+        console.error('${args._[0]} is out of range');
+        rules();
+        help();
+    }
 }
