@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import rps from "../lib/rpsls.js";
+import { rps } from "../lib/rpsls.js";
 import minimist from "minimist";
 
 const rules = `Rules for Rock Paper Scissors:
