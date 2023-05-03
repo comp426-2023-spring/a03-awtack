@@ -36,7 +36,8 @@ if(args.r || args.rules){
 }
 
 try {
-    console.log(JSON.stringify(rpsls(args._[0])));
+   console.log(JSON.stringify(rpsls(args._[0])));
+   process.exit(0);
 } catch (error){
     if(error  instanceof RangeError)
     {
